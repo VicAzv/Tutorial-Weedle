@@ -1,0 +1,9 @@
+{
+  "HelloHaplotypeCaller.RefFasta": "/Users/varstation/Downloads/helloHaplotypeCaller/ref/human_g1k_b37_20.fasta",
+  "HelloHaplotypeCaller.bamIndex": "/Users/varstation/Downloads/helloHaplotypeCaller/inputs/NA12878_wgs_20.bai",
+  "HelloHaplotypeCaller.GATK": "/Users/varstation/Downloads/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar",
+  "HelloHaplotypeCaller.RefIndex": "/Users/varstation/Downloads/helloHaplotypeCaller/ref/human_g1k_b37_20.fasta.fai",
+  "HelloHaplotypeCaller.RefDict": "/Users/varstation/Downloads/helloHaplotypeCaller/ref/human_g1k_b37_20.dict",
+  "HelloHaplotypeCaller.inputBAM": "/Users/varstation/Downloads/helloHaplotypeCaller/inputs/NA12878_wgs_20.bam",
+  "HelloHaplotypeCaller.sampleName": "Testando"
+}
