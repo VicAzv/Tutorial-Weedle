@@ -35,13 +35,12 @@ task HaplotypeCaller {
     }
 
     command <<<
-        java -jar ~{GATK} \
+        java -jar ~{gatk} \
             HaplotypeCaller \
             -R ~{refFasta} \
-            -I ~{inputBAM} \
+            -I ~{inputBam} \
             -O ~{sampleName}.raw.indels.snps.vcf
         >>>
-    }
 
     output {
         File rawVCF = "~{sampleName}.raw.indels.snps.vcf"

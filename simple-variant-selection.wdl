@@ -14,24 +14,24 @@ workflow SimpleVariantSelectionTask {
 
     call HaplotypeCaller {
         input:
-            GATK = gatk,
-            RefFasta = refFasta,
-            RefIndex = refIndex,
-            RefDict = refDict,
+            gatk = gatk,
+            refFasta = refFasta,
+            refIndex = refIndex,
+            refDict = refDict,
             sampleName = sampleName,
-            inputBAM = inputBam,
+            inputBam = inputBam,
             bamIndex = bamIndex
     }
 
     call SimpleVariantSelection as selectSNPs { 
         input:
-            GATK = gatk,
-            RefFasta = refFasta,
-            RefIndex = refIndex,
-            RefDict = refDict,
+            gatk = gatk,
+            refFasta = refFasta,
+            refIndex = refIndex,
+            refDict = refDict,
             sampleName = sampleName,
             type = "SNP", 
-                rawVCF = testando
+                rawVcf = testando
     }
     
     call SimpleVariantSelection as selectIndels { 
@@ -42,7 +42,7 @@ workflow SimpleVariantSelectionTask {
             refDict = refDict,
             sampleName = sampleName,
             type = "INDEL", 
-                rawVCF = testando 
+                rawVcf = testando 
     }
 }
 
@@ -63,8 +63,7 @@ task HaplotypeCaller {
             -R ~{refFasta} \
             -I ~{inputBam} \
             -O ~{sampleName}.raw.indels.snps.vcf
-        >>>
-    }
+    >>>
 
     output {
         File rawVcf = "~{sampleName}.raw.indels.snps.vcf"
@@ -89,8 +88,8 @@ task SimpleVariantSelection {
             -V ~{rawVcf} \
             -select-type ~{type} \
             -O ~{sampleName}_raw.~{type}.vcf
-        >>>
-}
+    >>>
+
     output {
         File rawSubset = "~{sampleName}_raw.~{type}.vcf"
     }
