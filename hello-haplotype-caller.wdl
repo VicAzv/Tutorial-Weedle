@@ -10,6 +10,7 @@ workflow HelloHaplotypeCaller {
         File inputBam
         File bamIndex
     }
+    
     call HaplotypeCaller{
         input:
             gatk = gatk,
@@ -33,15 +34,16 @@ task HaplotypeCaller {
         File bamIndex
     }
 
-    command {
-        java -jar ${GATK} \
+    command <<<
+        java -jar ~{GATK} \
             HaplotypeCaller \
-            -R ${refFasta} \
-            -I ${inputBAM} \
-            -O ${sampleName}.raw.indels.snps.vcf
+            -R ~{refFasta} \
+            -I ~{inputBAM} \
+            -O ~{sampleName}.raw.indels.snps.vcf
+        >>>
     }
 
     output {
-        File rawVCF = "${sampleName}.raw.indels.snps.vcf"
+        File rawVCF = "~{sampleName}.raw.indels.snps.vcf"
     }
 }
