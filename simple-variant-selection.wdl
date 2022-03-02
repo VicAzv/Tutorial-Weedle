@@ -1,97 +1,97 @@
 version 1.0
 
-workflow Tutorial_2 {
+workflow SimpleVariantSelection {
     input {
-        File GATK
-        File RefFasta
-        File RefIndex
-        File RefDict
+        File gatk
+        File refFasta
+        File refIndex
+        File refDict
         String sampleName
-        File inputBAM
+        File inputBam
         File bamIndex
-        File Testando
+        File testando
     }
 
     call HaplotypeCaller {
         input:
-            GATK = GATK,
-            RefFasta = RefFasta,
-            RefIndex = RefIndex,
-            RefDict = RefDict,
+            GATK = gatk,
+            RefFasta = refFasta,
+            RefIndex = refIndex,
+            RefDict = refDict,
             sampleName = sampleName,
-            inputBAM = inputBAM,
+            inputBAM = inputBam,
             bamIndex = bamIndex
     }
 
     call SimpleVariantSelection as selectSNPs { 
         input:
-            GATK = GATK,
-            RefFasta = RefFasta,
-            RefIndex = RefIndex,
-            RefDict = RefDict,
+            GATK = gatk,
+            RefFasta = refFasta,
+            RefIndex = refIndex,
+            RefDict = refDict,
             sampleName = sampleName,
             type = "SNP", 
-                rawVCF = Testando
+                rawVCF = testando
     }
     
     call SimpleVariantSelection as selectIndels { 
         input:
-            GATK = GATK,
-            RefFasta = RefFasta,
-            RefIndex = RefIndex,
-            RefDict = RefDict,
+            gatk = gatk,
+            refFasta = refFasta,
+            refIndex = refIndex,
+            refDict = refDict,
             sampleName = sampleName,
             type = "INDEL", 
-                rawVCF = Testando 
+                rawVCF = testando 
     }
 }
 
 task HaplotypeCaller {
     input {
-        File GATK
-        File RefFasta
-        File RefIndex
-        File RefDict
+        File gatk
+        File refFasta
+        File refIndex
+        File refDict
         String sampleName
-        File inputBAM
+        File inputBam
         File bamIndex
     }
 
-    command {
-        java -jar ${GATK} \
+    command <<<
+        java -jar ~{gatk} \
             HaplotypeCaller \
-            -R ${RefFasta} \
-            -I ${inputBAM} \
-            -O ${sampleName}.raw.indels.snps.vcf
+            -R ~{refFasta} \
+            -I ~{inputBam} \
+            -O ~{sampleName}.raw.indels.snps.vcf
+        >>>
     }
 
     output {
-        File rawVCF = "${sampleName}.raw.indels.snps.vcf"
+        File rawVcf = "~{sampleName}.raw.indels.snps.vcf"
     }
 }
 
 task SimpleVariantSelection {
     input {
-        File GATK
-        File RefFasta
-        File RefIndex
-        File RefDict
+        File gatk
+        File refFasta
+        File refIndex
+        File refDict
         String sampleName
         String type
-        File rawVCF
+        File rawVcf
     }
 
-    command {
-        java -jar ${GATK} \
+    command <<<
+        java -jar ~{gatk} \
             SelectVariants \
-            -R ${RefFasta} \
-            -V ${rawVCF} \
-            -select-type ${type} \
-            -O ${sampleName}_raw.${type}.vcf
-  }
-    output {
-        File rawSubset = "${sampleName}_raw.${type}.vcf"
-  }
+            -R ~{refFasta} \
+            -V ~{rawVcf} \
+            -select-type ~{type} \
+            -O ~{sampleName}_raw.~{type}.vcf
+        >>>
 }
-
-##apenas um comentário para fazer mudançaaas
+    output {
+        File rawSubset = "~{sampleName}_raw.~{type}.vcf"
+    }
+}
