@@ -1,0 +1,10 @@
+{
+  "SimpleVariantDiscovery.refIndex": "/Users/varstation/Downloads/helloHaplotypeCaller/ref/human_g1k_b37_20.fasta.fai",
+  "SimpleVariantDiscovery.refFasta": "/Users/varstation/Downloads/helloHaplotypeCaller/ref/human_g1k_b37_20.fasta",
+  "SimpleVariantDiscovery.gatk": "/Users/varstation/Downloads/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar",
+  "SimpleVariantDiscovery.sampleName": "Testando_Discovery",
+  "SimpleVariantDiscovery.refDict": "/Users/varstation/Downloads/helloHaplotypeCaller/ref/human_g1k_b37_20.dict",
+  "SimpleVariantDiscovery.inputBam": "/Users/varstation/Downloads/helloHaplotypeCaller/inputs/NA12878_wgs_20.bam",
+  "SimpleVariantDiscovery.bamIndex": "/Users/varstation/Downloads/helloHaplotypeCaller/inputs/NA12878_wgs_20.bai",
+  "SimpleVariantDiscovery.testando": "/Users/varstation/Downloads/helloHaplotypeCaller/outputs/NA12878.raw.indels.snps.vcf"
+}
