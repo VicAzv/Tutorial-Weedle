@@ -54,6 +54,7 @@ workflow SimpleVariantDiscovery {
             refDict = refDict, 
             rawSNPs = selectSNPs.rawSubset
     }
+    
     call HardFilterIndel {
         input:
             sampleName = sampleName, 
@@ -63,6 +64,7 @@ workflow SimpleVariantDiscovery {
             refDict = refDict,
             rawIndels = selectIndels.rawSubset
     }
+    
     call Combine {
         input:
             sampleName = sampleName, 
@@ -97,6 +99,12 @@ task HaplotypeCaller {
     output {
         File rawVcf = "~{sampleName}.raw.indels.snps.vcf"
     }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        inputBam: "Bam file"
+        output: "A location to put the output"
+    }
 }
 
 task SimpleVariantSelection {
@@ -121,6 +129,13 @@ task SimpleVariantSelection {
 
     output {
         File rawSubset = "~{sampleName}_raw.~{type}.vcf"
+    }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        rawVcf: "VCF file"
+        type: "Select only a certain type of variants from the input file"
+        output: "A location to put the output"
     }
 }
 
@@ -147,6 +162,14 @@ task HardFilterSNP {
     output {
         File filteredSNPs = "~{sampleName}.filtered.snps.vcf"
     }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        rawSNP: "SNP file"
+        filterExpression: "String, One or more expressions used with INFO fields to filter"
+        filterName: "String, Names to use for the list of filters"
+        output: "A location to put the output"
+    }
 }
 
 task HardFilterIndel {
@@ -172,6 +195,14 @@ task HardFilterIndel {
     output {
         File filteredIndels = "~{sampleName}.filtered.indels.vcf"
     }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        rawSNP: "SNP file"
+        filterExpression: "String, One or more expressions used with INFO fields to filter"
+        filterName: "String, Names to use for the list of filters"
+        output: "A location to put the output"
+    }
 }
 
 task Combine {
@@ -184,6 +215,7 @@ task Combine {
         File filteredSNPs
         File filteredIndels
     }
+    
     command <<<
         java -jar ~{gatk} \
             MergeVcfs \
@@ -195,5 +227,12 @@ task Combine {
 
     output {
         File filteredVCF = "~{sampleName}.filtered.snps.indels.vcf"
+    }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        filteredSNPs: "Filtered SNP file"
+        filteredIndels "FIltered Indel file"
+        output: "A location to put the output"
     }
 }
