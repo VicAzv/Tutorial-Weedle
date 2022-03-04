@@ -103,7 +103,7 @@ task HaplotypeCaller {
     parameter_meta {
         refFasta: "Reference fasta file"
         inputBam: "Bam file"
-        output: "A location to put the output"
+        rawVcf: "VCF file"
     }
 }
 
@@ -135,7 +135,7 @@ task SimpleVariantSelection {
         refFasta: "Reference fasta file"
         rawVcf: "VCF file"
         type: "Select only a certain type of variants from the input file"
-        output: "A location to put the output"
+        rawSubset: "Raw subset file"
     }
 }
 
@@ -168,7 +168,7 @@ task HardFilterSNP {
         rawSNP: "SNP file"
         filterExpression: "String, One or more expressions used with INFO fields to filter"
         filterName: "String, Names to use for the list of filters"
-        output: "A location to put the output"
+        filteredSNPs: "Filtered SNP file"
     }
 }
 
@@ -201,7 +201,7 @@ task HardFilterIndel {
         rawSNP: "SNP file"
         filterExpression: "String, One or more expressions used with INFO fields to filter"
         filterName: "String, Names to use for the list of filters"
-        output: "A location to put the output"
+        filteredIndels: "Filtered indel file"
     }
 }
 
@@ -232,7 +232,7 @@ task Combine {
     parameter_meta {
         refFasta: "Reference fasta file"
         filteredSNPs: "Filtered SNP file"
-        filteredIndels "FIltered Indel file"
-        output: "A location to put the output"
+        filteredIndels "Filtered Indel file"
+        filteredVCF: "Filtered VCF file"
     }
 }
