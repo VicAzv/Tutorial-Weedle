@@ -1,0 +1,8 @@
+{
+  "JointCallingGenotypes.inputSamplesFile": "/Users/varstation/Documents/Testweedle/Tutorial-do-Weedle/inputs-tsv.txt",
+  "JointCallingGenotypes.refFasta": "/Users/varstation/Documents/Testweedle/jointCallingGenotypes/ref/human_g1k_b37_20.fasta",
+  "JointCallingGenotypes.refDict": "/Users/varstation/Documents/Testweedle/jointCallingGenotypes/ref/human_g1k_b37_20.dict",
+  "JointCallingGenotypes.gatk": "/Users/varstation/Downloads/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar",
+  "JointCallingGenotypes.refIndex": "/Users/varstation/Documents/Testweedle/jointCallingGenotypes/ref/human_g1k_b37_20.fasta.fai"
+}
+

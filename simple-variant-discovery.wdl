@@ -232,7 +232,7 @@ task Combine {
     parameter_meta {
         refFasta: "Reference fasta file"
         filteredSNPs: "Filtered SNP file"
-        filteredIndels "Filtered Indel file"
+        filteredIndels: "Filtered Indel file"
         filteredVCF: "Filtered VCF file"
     }
 }
