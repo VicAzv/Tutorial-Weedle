@@ -31,7 +31,6 @@ workflow JointCallingGenotypes {
             refDict = refDict, 
             sampleName = "CEUtrio", 
             GVCFs = HaplotypeCallerERC.GVCF
-        
     }
 
     call GenotypeGVCFs {
@@ -68,6 +67,13 @@ task HaplotypeCallerERC {
     output {
         File GVCF = "~{sampleName}_rawLikelihoods.g.vcf"
     }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        bamFile: "Bam File"
+        ERC: "Enable reference confidence mode."
+        rawSubset: "Raw subset file"
+    }
 }
 
 task CombineGVCFs {
@@ -91,6 +97,12 @@ task CombineGVCFs {
     output {
         File combinedVCF = "${sampleName}_combineVariants.vcf"
     }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        GVCFs: "GVCF file"
+        rawSubset: "Raw subset file"
+    }
 }
 
 task GenotypeGVCFs {
@@ -113,5 +125,11 @@ task GenotypeGVCFs {
 
     output {
         File genotypedVCF = "${sampleName}_genotypeVariants.vcf"
+    }
+    
+    parameter_meta {
+        refFasta: "Reference fasta file"
+        combinedVCF: "Array of samples in VCF file"
+        rawSubset: "Raw subset file"
     }
 }
